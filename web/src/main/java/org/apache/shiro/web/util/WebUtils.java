@@ -477,6 +477,7 @@ public class WebUtils {
     }
 
     /**
+     * session运行创建，则直接返回ture
      * Returns {@code true} if a session is allowed to be created for a subject-associated request, {@code false}
      * otherwise.
      * <p/>

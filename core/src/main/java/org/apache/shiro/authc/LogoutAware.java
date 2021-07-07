@@ -33,6 +33,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 public interface LogoutAware {
 
     /**
+     * 当Subject退出系统的时候进行回调
      * Callback triggered when a <code>Subject</code> logs out of the system.
      *
      * @param principals the identifying principals of the Subject logging out.

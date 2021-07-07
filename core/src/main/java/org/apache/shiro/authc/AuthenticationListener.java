@@ -29,7 +29,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 public interface AuthenticationListener {
 
     /**
-     * 当{@code Subject}的身份验证尝试成功时触发回调。
+     * 当{@code Subject}的身份验证尝试成功时触发回调。可以通过实现该监听器，当该用户登录成功后给该用户发送 登录成功提醒
      * Callback triggered when an authentication attempt for a {@code Subject} has succeeded.
      *
      * @param token the authentication token submitted during the {@code Subject} (user)'s authentication attempt.

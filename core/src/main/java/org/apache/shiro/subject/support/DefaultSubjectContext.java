@@ -36,6 +36,7 @@ import org.slf4j.LoggerFactory;
 import java.io.Serializable;
 
 /**
+ * SubjectContext的默认实现类，
  * Default implementation of the {@link SubjectContext} interface.  Note that the getters and setters are not
  * simple pass-through methods to an underlying attribute;  the getters will employ numerous heuristics to acquire
  * their data attribute as best as possible (for example, if {@link #getPrincipals} is invoked, if the principals aren't

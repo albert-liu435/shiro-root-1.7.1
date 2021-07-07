@@ -21,6 +21,7 @@ package org.apache.shiro.subject.support;
 import org.apache.shiro.session.SessionException;
 
 /**
+ * session不可用异常
  * Exception thrown if attempting to create a new {@code Subject}
  * {@link org.apache.shiro.subject.Subject#getSession() session}, but that {@code Subject}'s sessions are disabled.
  * <p/>

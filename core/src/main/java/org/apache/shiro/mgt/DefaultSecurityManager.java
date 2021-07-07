@@ -187,6 +187,7 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
      * authenticated subject.
      */
     protected Subject createSubject(AuthenticationToken token, AuthenticationInfo info, Subject existing) {
+
         SubjectContext context = createSubjectContext();
         context.setAuthenticated(true);
         context.setAuthenticationToken(token);
@@ -285,7 +286,7 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
     public Subject login(Subject subject, AuthenticationToken token) throws AuthenticationException {
         AuthenticationInfo info;
         try {
-            //验证token
+            //验证token，即验证用户的身份信息
             info = authenticate(token);
         } catch (AuthenticationException ae) {
             try {
@@ -299,8 +300,10 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
             throw ae; //propagate
         }
 
+        //创建Subject
         Subject loggedIn = createSubject(token, info, subject);
 
+        //登录成功后的操作，主要完成记住我的 功能
         onSuccessfulLogin(token, info, loggedIn);
 
         return loggedIn;
@@ -330,6 +333,7 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
     }
 
     /**
+     * 创建Subject
      * This implementation functions as follows:
      * <p/>
      * <ol>
@@ -571,9 +575,10 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
         if (subject == null) {
             throw new IllegalArgumentException("Subject method argument cannot be null.");
         }
-
+        //退出之前需要做的事情，主要为记住我已经退出
         beforeLogout(subject);
 
+        //获取身份信息集合
         PrincipalCollection principals = subject.getPrincipals();
         if (principals != null && !principals.isEmpty()) {
             if (log.isDebugEnabled()) {

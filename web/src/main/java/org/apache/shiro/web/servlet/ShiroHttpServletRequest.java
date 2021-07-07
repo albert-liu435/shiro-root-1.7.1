@@ -137,10 +137,17 @@ public class ShiroHttpServletRequest extends HttpServletRequestWrapper {
         return requestedSessionId;
     }
 
+    /**
+     * 获取session实例，如果不存在则进行创建
+     *
+     * @param create
+     * @return
+     */
     public HttpSession getSession(boolean create) {
 
         HttpSession httpSession;
 
+        //判断是否为httpsession
         if (isHttpSessions()) {
             httpSession = super.getSession(false);
             if (httpSession == null && create) {
@@ -187,6 +194,11 @@ public class ShiroHttpServletRequest extends HttpServletRequestWrapper {
         return new DisabledSessionException(msg);
     }
 
+    /**
+     * 获取session实例，如果不存在则进行创建
+     *
+     * @return
+     */
     public HttpSession getSession() {
         return getSession(true);
     }

@@ -22,6 +22,7 @@ import java.io.Serializable;
 import java.util.*;
 
 /**
+ * 可以认为是一个map,里面封装了map用来保存数据
  * A {@code MapContext} provides a common base for context-based data storage in a {@link Map}.  Type-safe attribute
  * retrieval is provided for subclasses with the {@link #getTypedValue(String, Class)} method.
  *

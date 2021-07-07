@@ -22,6 +22,7 @@ import org.apache.shiro.ShiroException;
 
 
 /**
+ * session 异常
  * General security exception attributed to problems during interaction with the system during
  * a session.
  *

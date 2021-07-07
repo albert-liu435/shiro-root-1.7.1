@@ -19,7 +19,7 @@
 package org.apache.shiro;
 
 /**
- * Shiro框架的root 异常体系
+ * Shiro框架的root 异常体系,该类的shiro中的顶级类
  * Root exception for all Shiro runtime exceptions.  This class is used as the root instead
  * of {@link java.lang.SecurityException} to remove the potential for conflicts;  many other
  * frameworks and products (such as J2EE containers) perform special operations when

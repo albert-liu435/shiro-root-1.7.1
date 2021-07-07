@@ -278,6 +278,7 @@ public abstract class AuthenticatingRealm extends CachingRealm implements Initia
     }
 
     /**
+     * 返回缓存名称
      * Returns the name of a {@link Cache} to lookup from any available {@link #getCacheManager() cacheManager} if
      * a cache is not explicitly configured via {@link #setAuthenticationCache(org.apache.shiro.cache.Cache)}.
      * <p/>
@@ -452,6 +453,7 @@ public abstract class AuthenticatingRealm extends CachingRealm implements Initia
     private Cache<Object, AuthenticationInfo> getAvailableAuthenticationCache() {
         //返回用于身份认证的缓存实例
         Cache<Object, AuthenticationInfo> cache = getAuthenticationCache();
+        //判断缓存是否可用，如果可用就去懒加载AuthenticationInfo，并将AuthenticationInfo缓存起来
         boolean authcCachingEnabled = isAuthenticationCachingEnabled();
         if (cache == null && authcCachingEnabled) {
             cache = getAuthenticationCacheLazy();
@@ -460,6 +462,7 @@ public abstract class AuthenticatingRealm extends CachingRealm implements Initia
     }
 
     /**
+     * 检查是authenticationCache class attribute是否为null,如果为null,则尝试获取配置的cacheManager
      * Checks to see if the authenticationCache class attribute is null, and if so, attempts to acquire one from
      * any configured {@link #getCacheManager() cacheManager}.  If one is acquired, it is set as the class attribute.
      * The class attribute is then returned.
@@ -476,6 +479,7 @@ public abstract class AuthenticatingRealm extends CachingRealm implements Initia
             CacheManager cacheManager = getCacheManager();
 
             if (cacheManager != null) {
+                //获取缓存管理器名称
                 String cacheName = getAuthenticationCacheName();
                 log.debug("CacheManager [{}] configured.  Building authentication cache '{}'", cacheManager, cacheName);
                 this.authenticationCache = cacheManager.getCache(cacheName);
@@ -585,10 +589,11 @@ public abstract class AuthenticatingRealm extends CachingRealm implements Initia
      * @throws AuthenticationException if authentication failed.
      */
     public final AuthenticationInfo getAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        //从缓存中获取AuthenticationInfo
+        //如果配置了缓存，则从缓存中获取AuthenticationInfo，即AuthenticationInfo中封装了用户的身份和凭证信息
         AuthenticationInfo info = getCachedAuthenticationInfo(token);
         if (info == null) {
             //otherwise not cached, perform the lookup:
+            //缓存中没有，则调用该方法获取AuthenticationInfo
             info = doGetAuthenticationInfo(token);
             log.debug("Looked up AuthenticationInfo [{}] from doGetAuthenticationInfo", info);
             if (token != null && info != null) {

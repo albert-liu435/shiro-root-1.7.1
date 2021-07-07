@@ -285,8 +285,11 @@ public class ModularRealmAuthenticator extends AbstractAuthenticator {
      *                                 for the given principal and credentials.
      */
     protected AuthenticationInfo doAuthenticate(AuthenticationToken authenticationToken) throws AuthenticationException {
+        //判断是否进行Realms配置，如果没有直接会抛出异常
         assertRealmsConfigured();
+        //获取相关realms集合
         Collection<Realm> realms = getRealms();
+        //根据realms的数量进行响应的操作
         if (realms.size() == 1) {
             //进行身份认证
             return doSingleRealmAuthentication(realms.iterator().next(), authenticationToken);

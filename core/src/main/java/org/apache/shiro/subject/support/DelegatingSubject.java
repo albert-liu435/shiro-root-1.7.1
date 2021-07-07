@@ -76,6 +76,7 @@ public class DelegatingSubject implements Subject {
     private static final String RUN_AS_PRINCIPALS_SESSION_KEY =
             DelegatingSubject.class.getName() + ".RUN_AS_PRINCIPALS_SESSION_KEY";
 
+    //里面封装了用户的身份信息
     protected PrincipalCollection principals;
     protected boolean authenticated;
     protected String host;
@@ -277,6 +278,7 @@ public class DelegatingSubject implements Subject {
         if (subject instanceof DelegatingSubject) {
             DelegatingSubject delegating = (DelegatingSubject) subject;
             //we have to do this in case there are assumed identities - we don't want to lose the 'real' principals:
+            //用户的身份信息
             principals = delegating.principals;
             host = delegating.host;
         } else {
@@ -304,6 +306,11 @@ public class DelegatingSubject implements Subject {
         }
     }
 
+    /**
+     * 判断是否登录了
+     *
+     * @return
+     */
     public boolean isAuthenticated() {
         return authenticated && hasPrincipals();
     }
@@ -328,7 +335,7 @@ public class DelegatingSubject implements Subject {
     }
 
     /**
-     * 获取session
+     * 获取session,当未false的情况下，如果session不存在则直接返回null
      *
      * @param create boolean argument determining if a new session should be created or not if there is no existing session.
      * @return
@@ -343,6 +350,7 @@ public class DelegatingSubject implements Subject {
         if (this.session == null && create) {
 
             //added in 1.2:
+            //判断是否可以创建session
             if (!isSessionCreationEnabled()) {
                 String msg = "Session creation has been disabled for the current subject.  This exception indicates " +
                         "that there is either a programming error (using a session when it should never be " +
@@ -354,15 +362,20 @@ public class DelegatingSubject implements Subject {
 
             log.trace("Starting session for host {}", getHost());
             SessionContext sessionContext = createSessionContext();
+            //用于创建session实例
             Session session = this.securityManager.start(sessionContext);
             this.session = decorate(session);
         }
         return this.session;
     }
 
+    /**
+     * @return
+     */
     protected SessionContext createSessionContext() {
         SessionContext sessionContext = new DefaultSessionContext();
         if (StringUtils.hasText(host)) {
+            //设置host
             sessionContext.setHost(host);
         }
         return sessionContext;
@@ -381,6 +394,9 @@ public class DelegatingSubject implements Subject {
         }
     }
 
+    /**
+     * 退出
+     */
     public void logout() {
         try {
             clearRunAsIdentitiesInternal();

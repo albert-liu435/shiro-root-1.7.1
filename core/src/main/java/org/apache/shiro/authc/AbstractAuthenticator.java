@@ -236,7 +236,7 @@ public abstract class AbstractAuthenticator implements Authenticator, LogoutAwar
         }
 
         log.debug("Authentication successful for token [{}].  Returned account [{}]", token, info);
-        //通知认证成功
+        //通知身份认证成功
         notifySuccess(token, info);
 
         return info;

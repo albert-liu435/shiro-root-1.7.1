@@ -22,6 +22,7 @@ import java.io.Serializable;
 import java.util.Map;
 
 /**
+ * 用于构造session实例
  * A {@code SessionContext} is a 'bucket' of data presented to a {@link SessionFactory SessionFactory} which interprets
  * this data to construct {@link org.apache.shiro.session.Session Session} instances.  It is essentially a Map of data
  * with a few additional type-safe methods for easy retrieval of objects commonly used to construct Subject instances.
@@ -79,7 +80,7 @@ public interface SessionContext extends Map<String, Object> {
      * {@code Session} host.
      *
      * @return the originating host name or IP address (as a String) from where the {@code Subject} is initiating the
-     *         {@code Session}.
+     * {@code Session}.
      * @see #setHost(String) setHost(String)
      */
     String getHost();

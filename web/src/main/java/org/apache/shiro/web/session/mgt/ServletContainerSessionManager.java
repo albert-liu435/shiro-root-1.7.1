@@ -32,6 +32,7 @@ import javax.servlet.http.HttpSession;
 
 
 /**
+ * SessionManager的实现类，用于提供session
  * SessionManager implementation providing {@link Session} implementations that are merely wrappers for the
  * Servlet container's {@link HttpSession}.
  * <p/>
@@ -48,8 +49,8 @@ import javax.servlet.http.HttpSession;
  * instead.  The {@code DefaultWebSessionManager} supports both traditional web-based access as well as non web-based
  * clients.
  *
- * @since 0.9
  * @see DefaultWebSessionManager
+ * @since 0.9
  */
 public class ServletContainerSessionManager implements WebSessionManager {
 
@@ -95,14 +96,18 @@ public class ServletContainerSessionManager implements WebSessionManager {
     }
 
     /**
+     * 用于创建sessin实例
+     *
      * @since 1.0
      */
     protected Session createSession(SessionContext sessionContext) throws AuthorizationException {
+        //判断是否为http请求
         if (!WebUtils.isHttp(sessionContext)) {
             String msg = "SessionContext must be an HTTP compatible implementation.";
             throw new IllegalArgumentException(msg);
         }
 
+        //获取HttpServletRequest
         HttpServletRequest request = WebUtils.getHttpRequest(sessionContext);
 
         HttpSession httpSession = request.getSession();
@@ -126,7 +131,7 @@ public class ServletContainerSessionManager implements WebSessionManager {
      * @return {@code true} always
      * @since 1.2
      */
-	public boolean isServletContainerSessions() {
-		return true;
-	}
+    public boolean isServletContainerSessions() {
+        return true;
+    }
 }

@@ -27,6 +27,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
 /**
+ * WebSubjectContext的实现类，额外提供了存储和获取ServletRequest和ServletResponse
  * Default {@code WebSubjectContext} implementation that provides for additional storage and retrieval of
  * a {@link ServletRequest} and {@link ServletResponse}.
  *

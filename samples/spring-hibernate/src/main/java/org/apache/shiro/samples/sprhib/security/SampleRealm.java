@@ -54,10 +54,17 @@ public class SampleRealm extends AuthorizingRealm {
         this.userDAO = userDAO;
     }
 
+    /**
+     * 获取AuthenticationInfo
+     *
+     * @param authcToken
+     * @return
+     * @throws AuthenticationException
+     */
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
         User user = userDAO.findUser(token.getUsername());
-        if( user != null ) {
+        if (user != null) {
             return new SimpleAuthenticationInfo(user.getId(), user.getPassword(), getName());
         } else {
             return null;
@@ -68,11 +75,11 @@ public class SampleRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         Long userId = (Long) principals.fromRealm(getName()).iterator().next();
         User user = userDAO.getUser(userId);
-        if( user != null ) {
+        if (user != null) {
             SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-            for( Role role : user.getRoles() ) {
+            for (Role role : user.getRoles()) {
                 info.addRole(role.getName());
-                info.addStringPermissions( role.getPermissions() );
+                info.addStringPermissions(role.getPermissions());
             }
             return info;
         } else {
