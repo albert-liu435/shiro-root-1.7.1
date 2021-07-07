@@ -37,6 +37,7 @@ import java.lang.reflect.Method;
 public class SpringAnnotationResolver implements AnnotationResolver {
 
     public Annotation getAnnotation(MethodInvocation mi, Class<? extends Annotation> clazz) {
+        //获取该注解的方法
         Method m = mi.getMethod();
 
         Annotation a = AnnotationUtils.findAnnotation(m, clazz);

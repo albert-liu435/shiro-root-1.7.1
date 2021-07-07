@@ -19,4 +19,4 @@
 /**
  * Caching support used to enhance performance for security operations.
  */
-package org.apache.shiro.cache;
+package org.apache.shiro.cache;AuthorizingRealm

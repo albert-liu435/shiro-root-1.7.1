@@ -32,7 +32,7 @@ import java.security.Principal;
 
 
 /**
- * shiro框架内部的HttpServletRequest
+ * shiro框架内部的HttpServletRequest，把包装了HttpServletRequest
  * A {@code ShiroHttpServletRequest} wraps the Servlet container's original {@code ServletRequest} instance, but ensures
  * that all {@link HttpServletRequest} invocations that require Shiro's support ({@link #getRemoteUser getRemoteUser},
  * {@link #getSession getSession}, etc) can be executed first by Shiro as necessary before allowing the underlying

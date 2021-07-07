@@ -23,7 +23,8 @@ import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 
 /**
- * 这个实在不知道怎么翻译合适。通俗一点理解就是realm可以访问安全相关数据，提供统一的数据封装来给上层做数据校验。shiro的建议是每种数据源定义一个realm，比如用户数据存在数据库可以使用JdbcRealm；存在属性配置文件可以使用PropertiesRealm。一般我们使用shiro都使用自定义的realm。
+ * 这个实在不知道怎么翻译合适。通俗一点理解就是realm可以访问安全相关数据，提供统一的数据封装来给上层做数据校验。shiro的建议是每种数据源定义一个realm，比如用户数据存在数据库可以使用JdbcRealm；
+ * 存在属性配置文件可以使用PropertiesRealm。一般我们使用shiro都使用自定义的realm。
  * 当有多个realm存在的时候，shiro在做用户校验的时候会按照定义的策略来决定认证是否通过，shiro提供的可选策略有一个成功或者所有都成功等。
  * 一个realm对应了一个CredentialsMatcher，用来做用户提交认证信息和realm获取得用户信息做比对，shiro已经提供了常用的比如用户密码和存储的Hash后的密码的对比。
  * <p>

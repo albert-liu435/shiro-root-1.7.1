@@ -35,7 +35,8 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 /**
- * 请求主体。比如登录用户，比如一个被授权的app。在程序中任何地方都可以通过SecurityUtils.getSubject()获取到当前的subject。subject中可以获取到Principal，这个是subject的标识，比如登陆用户的用户名或者id等，shiro不对值做限制。但是在登录和授权过程中，程序需要通过principal来识别唯一的用户。
+ * 请求主体。比如登录用户，比如一个被授权的app。在程序中任何地方都可以通过SecurityUtils.getSubject()获取到当前的subject。subject中可以获取到Principal，这个是subject的标识，比如登陆用户的用户名或者id等，
+ * shiro不对值做限制。但是在登录和授权过程中，程序需要通过principal来识别唯一的用户。
  * <p>
  * 作者：空挡
  * 链接：https://www.jianshu.com/p/0b1131be7ace
@@ -106,6 +107,7 @@ import java.util.concurrent.Callable;
 public interface Subject {
 
     /**
+     * 返回用户的身份证明，比如用户名、邮箱等，唯一即可
      * Returns this Subject's application-wide uniquely identifying principal, or {@code null} if this
      * Subject is anonymous because it doesn't yet have any associated account data (for example,
      * if they haven't logged in).
@@ -137,6 +139,7 @@ public interface Subject {
     Object getPrincipal();
 
     /**
+     * 返回用户的身份证明，比如用户名、邮箱等，唯一即可
      * Returns this Subject's principals (identifying attributes) in the form of a {@code PrincipalCollection} or
      * {@code null} if this Subject is anonymous because it doesn't yet have any associated account data (for example,
      * if they haven't logged in).

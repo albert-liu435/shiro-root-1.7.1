@@ -30,6 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * PasswordService的接口的默认实现类，用来对密码进行加密与匹配
  * Default implementation of the {@link PasswordService} interface that relies on an internal
  * {@link HashService}, {@link HashFormat}, and {@link HashFormatFactory} to function:
  * <h2>Hashing Passwords</h2>
@@ -153,7 +154,7 @@ public class DefaultPasswordService implements HashingPasswordService {
 
         if (discoveredFormat != null && discoveredFormat instanceof ParsableHashFormat) {
 
-            ParsableHashFormat parsableHashFormat = (ParsableHashFormat)discoveredFormat;
+            ParsableHashFormat parsableHashFormat = (ParsableHashFormat) discoveredFormat;
             Hash savedHash = parsableHashFormat.parse(saved);
 
             return passwordsMatch(submittedPlaintext, savedHash);

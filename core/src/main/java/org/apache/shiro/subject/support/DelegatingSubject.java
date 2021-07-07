@@ -265,7 +265,9 @@ public class DelegatingSubject implements Subject {
      * @throws AuthenticationException
      */
     public void login(AuthenticationToken token) throws AuthenticationException {
+        //主要为清除session
         clearRunAsIdentitiesInternal();
+        //委托给securityManager进行登录
         Subject subject = securityManager.login(this, token);
 
         PrincipalCollection principals;

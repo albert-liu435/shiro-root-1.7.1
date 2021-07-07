@@ -21,6 +21,7 @@ package org.apache.shiro.authc.credential;
 import org.apache.shiro.util.ByteSource;
 
 /**
+ * PasswordService主要用来定义对密码进行加密以及对密码进行匹配的接口
  * A {@code PasswordService} supports common use cases when using passwords as a credentials mechanism.
  * <p/>
  * Most importantly, implementations of this interface are expected to employ best-practices to ensure that
@@ -72,6 +73,7 @@ import org.apache.shiro.util.ByteSource;
 public interface PasswordService {
 
     /**
+     * 对密码进行加密
      * Converts the specified plaintext password (usually acquired from your application's 'new user' or 'password reset'
      * workflow) into a formatted string safe for storage.  The returned string can be safely saved with the
      * corresponding user account record (e.g. as a 'password' attribute).
@@ -115,6 +117,7 @@ public interface PasswordService {
     String encryptPassword(Object plaintextPassword) throws IllegalArgumentException;
 
     /**
+     * 对密码进行匹配
      * Returns {@code true} if the {@code submittedPlaintext} password matches the existing {@code saved} password,
      * {@code false} otherwise.
      * <h3>Usage</h3>
@@ -140,7 +143,7 @@ public interface PasswordService {
      *                           {@link #encryptPassword(Object) encryptPassword} method (typically
      *                           when the account is created or the account's password is reset).
      * @return {@code true} if the {@code submittedPlaintext} password matches the existing {@code saved} password,
-     *         {@code false} otherwise.
+     * {@code false} otherwise.
      * @see ByteSource.Util#isCompatible(Object)
      */
     boolean passwordsMatch(Object submittedPlaintext, String encrypted);

@@ -61,7 +61,7 @@ import java.io.Serializable;
 public interface AuthenticationToken extends Serializable {
 
     /**
-     * 返回身份信息
+     * 返回身份信息，相当于用户的用户名
      * Returns the account identity submitted during the authentication process.
      * <p/>
      * <p>Most application authentications are username/password based and have this
@@ -78,7 +78,7 @@ public interface AuthenticationToken extends Serializable {
     Object getPrincipal();
 
     /**
-     * 返回用户凭证信息
+     * 返回用户凭证信息，相当于用户的用户密码
      * Returns the credentials submitted by the user during the authentication process that verifies
      * the submitted {@link #getPrincipal() account identity}.
      * <p/>

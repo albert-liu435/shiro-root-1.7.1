@@ -19,6 +19,7 @@
 package org.apache.shiro.crypto.hash;
 
 /**
+ * 采用特定的策略用来对输入的资源进行哈希
  * A {@code HashService} hashes input sources utilizing a particular hashing strategy.
  * <p/>
  * A {@code HashService} sits at a higher architectural level than Shiro's simple {@link Hash} classes:  it allows
@@ -53,10 +54,11 @@ package org.apache.shiro.crypto.hash;
 public interface HashService {
 
     /**
+     * 基于给定的请求计算哈希
      * Computes a hash based on the given request.
      *
      * <h3>Salt Notice</h3>
-     *
+     * <p>
      * If a salt accompanies the return value
      * (i.e. <code>returnedHash.{@link org.apache.shiro.crypto.hash.Hash#getSalt() getSalt()} != null</code>), this
      * same exact salt <b><em>MUST</em></b> be presented back to the {@code HashService} if hash
