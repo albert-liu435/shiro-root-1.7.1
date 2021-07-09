@@ -24,6 +24,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -121,7 +122,7 @@ public class AuthorizingRealmTest {
 
     @Test
     public void testNullAuthzInfo() {
-	AuthorizingRealm realm = new AuthorizingRealm() {
+        AuthorizingRealm realm = new AuthorizingRealm() {
             protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
                 return null;
             }
@@ -198,34 +199,30 @@ public class AuthorizingRealmTest {
         assertFalse(realm.isPermittedAll(pCollection, "perm1", "perm2"));
         assertFalse(realm.isPermittedAll(pCollection, permList));
     }
-    
+
     @Test
-    public void testRealmWithRolePermissionResolver()
-    {   
+    public void testRealmWithRolePermissionResolver() {
         Principal principal = new UsernamePrincipal("rolePermResolver");
         PrincipalCollection pCollection = new SimplePrincipalCollection(principal, "testRealmWithRolePermissionResolver");
-        
+
         AuthorizingRealm realm = new AllowAllRealm();
-        realm.setRolePermissionResolver( new RolePermissionResolver()
-        { 
-            public Collection<Permission> resolvePermissionsInRole( String roleString )
-            {
+        realm.setRolePermissionResolver(new RolePermissionResolver() {
+            public Collection<Permission> resolvePermissionsInRole(String roleString) {
                 Collection<Permission> permissions = new HashSet<Permission>();
-                if( roleString.equals( ROLE ))
-                {
-                    permissions.add( new WildcardPermission( ROLE + ":perm1" ) );
-                    permissions.add( new WildcardPermission( ROLE + ":perm2" ) );
-                    permissions.add( new WildcardPermission( "other:*:foo" ) );
+                if (roleString.equals(ROLE)) {
+                    permissions.add(new WildcardPermission(ROLE + ":perm1"));
+                    permissions.add(new WildcardPermission(ROLE + ":perm2"));
+                    permissions.add(new WildcardPermission("other:*:foo"));
                 }
                 return permissions;
             }
         });
-        
-        assertTrue( realm.hasRole( pCollection, ROLE ) );
-        assertTrue( realm.isPermitted( pCollection, ROLE + ":perm1" ) );
-        assertTrue( realm.isPermitted( pCollection, ROLE + ":perm2" ) );
-        assertFalse( realm.isPermitted( pCollection, ROLE + ":perm3" ) );
-        assertTrue( realm.isPermitted( pCollection, "other:bar:foo" ) );
+
+        assertTrue(realm.hasRole(pCollection, ROLE));
+        assertTrue(realm.isPermitted(pCollection, ROLE + ":perm1"));
+        assertTrue(realm.isPermitted(pCollection, ROLE + ":perm2"));
+        assertFalse(realm.isPermitted(pCollection, ROLE + ":perm3"));
+        assertTrue(realm.isPermitted(pCollection, "other:bar:foo"));
     }
 
     @Test
@@ -234,18 +231,15 @@ public class AuthorizingRealmTest {
         PrincipalCollection pCollection = new SimplePrincipalCollection(principal, "testRealmWithRolePermissionResolver");
 
         AuthorizingRealm realm = new AllowAllRealm();
-        realm.setRolePermissionResolver( new RolePermissionResolver()
-        {
-            public Collection<Permission> resolvePermissionsInRole( String roleString )
-            {
+        realm.setRolePermissionResolver(new RolePermissionResolver() {
+            public Collection<Permission> resolvePermissionsInRole(String roleString) {
                 Collection<Permission> permissions = new HashSet<Permission>();
-                if( roleString.equals( ROLE ))
-                {
-                    permissions.add( new WildcardPermission( ROLE + ":perm1" ) );
-                    permissions.add( new WildcardPermission( ROLE + ":perm2" ) );
-                    permissions.add( new WildcardPermission( ROLE + ": " ) );
-                    permissions.add( new WildcardPermission( ROLE + ":\t" ) );
-                    permissions.add( new WildcardPermission( "other:*:foo" ) );
+                if (roleString.equals(ROLE)) {
+                    permissions.add(new WildcardPermission(ROLE + ":perm1"));
+                    permissions.add(new WildcardPermission(ROLE + ":perm2"));
+                    permissions.add(new WildcardPermission(ROLE + ": "));
+                    permissions.add(new WildcardPermission(ROLE + ":\t"));
+                    permissions.add(new WildcardPermission("other:*:foo"));
                 }
                 return permissions;
             }
@@ -258,6 +252,7 @@ public class AuthorizingRealmTest {
         authorizationInfo.addStringPermission(" ");
         authorizationInfo.addStringPermission("\t");
         authorizationInfo.addStringPermission(null);
+        //获取权限实例的集合
         Collection<Permission> permissions = realm.getPermissions(authorizationInfo);
         assertEquals(permissions.size(), 4);
     }

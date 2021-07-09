@@ -57,7 +57,9 @@ public abstract class CachingRealm implements Realm, Nameable, CacheManagerAware
     /*--------------------------------------------
     |    I N S T A N C E   V A R I A B L E S    |
     ============================================*/
+    //Realm名称
     private String name;
+    //当设置为true时，则采用缓存
     private boolean cachingEnabled;
     //缓存管理器
     private CacheManager cacheManager;
@@ -88,6 +90,7 @@ public abstract class CachingRealm implements Realm, Nameable, CacheManagerAware
     }
 
     /**
+     * 设置缓存管理器
      * Sets the <tt>CacheManager</tt> to be used for data caching to reduce EIS round trips.
      * <p/>
      * This property is <tt>null</tt> by default, indicating that caching is turned off.
@@ -100,6 +103,7 @@ public abstract class CachingRealm implements Realm, Nameable, CacheManagerAware
     }
 
     /**
+     * 是否使用缓存
      * Returns {@code true} if caching should be used if a {@link CacheManager} has been
      * {@link #setCacheManager(org.apache.shiro.cache.CacheManager) configured}, {@code false} otherwise.
      * <p/>
@@ -141,6 +145,7 @@ public abstract class CachingRealm implements Realm, Nameable, CacheManagerAware
     }
 
     /**
+     * 退出的时候清除缓存
      * If caching is enabled, this will clear any cached data associated with the specified account identity.
      * Subclasses are free to override for additional behavior, but be sure to call {@code super.onLogout} first.
      * <p/>
@@ -152,6 +157,7 @@ public abstract class CachingRealm implements Realm, Nameable, CacheManagerAware
      * @since 1.2
      */
     public void onLogout(PrincipalCollection principals) {
+        //清除缓存
         clearCache(principals);
     }
 
@@ -169,6 +175,7 @@ public abstract class CachingRealm implements Realm, Nameable, CacheManagerAware
      * @since 1.2
      */
     protected void clearCache(PrincipalCollection principals) {
+        //
         if (!isEmpty(principals)) {
             doClearCache(principals);
             log.trace("Cleared cache entries for account with principals [{}]", principals);
@@ -185,6 +192,7 @@ public abstract class CachingRealm implements Realm, Nameable, CacheManagerAware
     }
 
     /**
+     * 获取可用的身份集合
      * A utility method for subclasses that returns the first available principal of interest to this particular realm.
      * The heuristic used to acquire the principal is as follows:
      * <ul>
@@ -205,6 +213,7 @@ public abstract class CachingRealm implements Realm, Nameable, CacheManagerAware
     protected Object getAvailablePrincipal(PrincipalCollection principals) {
         Object primary = null;
         if (!isEmpty(principals)) {
+            //
             Collection thisPrincipals = principals.fromRealm(getName());
             if (!CollectionUtils.isEmpty(thisPrincipals)) {
                 primary = thisPrincipals.iterator().next();

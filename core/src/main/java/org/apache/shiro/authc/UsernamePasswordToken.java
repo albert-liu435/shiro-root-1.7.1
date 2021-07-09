@@ -53,22 +53,26 @@ public class UsernamePasswordToken implements HostAuthenticationToken, RememberM
     |    I N S T A N C E   V A R I A B L E S    |
     ============================================*/
     /**
+     * 用户名
      * The username
      */
     private String username;
 
     /**
+     * 密码
      * The password, in char[] format
      */
     private char[] password;
 
     /**
+     * 是否记住我
      * Whether or not 'rememberMe' should be enabled for the corresponding login attempt;
      * default is <code>false</code>
      */
     private boolean rememberMe = false;
 
     /**
+     * 登录用户的主机
      * The location from where the login attempt occurs, or <code>null</code> if not known or explicitly
      * omitted.
      */

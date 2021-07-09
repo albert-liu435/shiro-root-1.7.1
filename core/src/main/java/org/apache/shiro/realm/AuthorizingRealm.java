@@ -81,9 +81,9 @@ public abstract class AuthorizingRealm extends AuthenticatingRealm
     private boolean authorizationCachingEnabled;
     private Cache<Object, AuthorizationInfo> authorizationCache;
     private String authorizationCacheName;
-
+    //权限解析器，用于解析权限
     private PermissionResolver permissionResolver;
-
+    //角色解析器，用于解析角色信息
     private RolePermissionResolver permissionRoleResolver;
 
     /*-------------------------------------------
@@ -496,6 +496,7 @@ public abstract class AuthorizingRealm extends AuthenticatingRealm
 
     //visibility changed from private to protected per SHIRO-332
     protected boolean isPermitted(Permission permission, AuthorizationInfo info) {
+        //获取权限实例的集合
         Collection<Permission> perms = getPermissions(info);
         if (perms != null && !perms.isEmpty()) {
             for (Permission perm : perms) {

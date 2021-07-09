@@ -94,6 +94,7 @@ public class JdbcRealm extends AuthorizingRealm {
     private static final Logger log = LoggerFactory.getLogger(JdbcRealm.class);
 
     /**
+     * 密码加盐设置，默认为不加盐处理
      * Password hash salt configuration. <ul>
      * <li>NO_SALT - password hashes are not salted.</li>
      * <li>CRYPT - password hashes are stored in unix crypt format.</li>

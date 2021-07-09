@@ -37,6 +37,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 
 /**
+ * Realm接口的抽象实现类，用来进行身份认证
  * A top-level abstract implementation of the <tt>Realm</tt> interface that only implements authentication support
  * (log-in) operations and leaves authorization (access control) behavior to subclasses.
  * <h2>Authentication Caching</h2>
@@ -126,11 +127,12 @@ public abstract class AuthenticatingRealm extends CachingRealm implements Initia
     private static final String DEFAULT_AUTHENTICATION_CACHE_SUFFIX = ".authenticationCache";
 
     /**
+     * 凭证匹配器
      * Credentials matcher used to determine if the provided credentials match the credentials stored in the data store.
      */
     private CredentialsMatcher credentialsMatcher;
 
-
+    //用于缓存AuthenticationInfo,里面主要封装了用户的信息
     private Cache<Object, AuthenticationInfo> authenticationCache;
 
     private boolean authenticationCachingEnabled;
@@ -383,7 +385,7 @@ public abstract class AuthenticatingRealm extends CachingRealm implements Initia
     }
 
     /**
-     * 执行init方法
+     * 执行init方法进行初始化操作
      * Initializes this realm and potentially enables an authentication cache, depending on configuration.  Based on
      * the availability of an authentication cache, this class functions as follows:
      * <ol>
@@ -408,6 +410,7 @@ public abstract class AuthenticatingRealm extends CachingRealm implements Initia
      */
     public final void init() {
         //trigger obtaining the authorization cache if possible
+        //从缓存中获取Authentication
         getAvailableAuthenticationCache();
         onInit();
     }
@@ -604,6 +607,7 @@ public abstract class AuthenticatingRealm extends CachingRealm implements Initia
         }
 
         if (info != null) {
+            //对用户的凭证进行校验，即密码
             assertCredentialsMatch(token, info);
         } else {
             log.debug("No AuthenticationInfo found for submitted AuthenticationToken [{}].  Returning null.", token);

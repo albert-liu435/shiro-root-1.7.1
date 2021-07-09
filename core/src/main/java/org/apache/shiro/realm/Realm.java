@@ -120,6 +120,7 @@ public interface Realm {
 
     /**
      * 根据Token获取认证信息
+     * 进行身份认证，认证成功则返回AuthenticationInfo
      * Returns an account's authentication-specific information for the specified <tt>token</tt>,
      * or <tt>null</tt> if no account could be found based on the <tt>token</tt>.
      *
