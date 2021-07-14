@@ -93,6 +93,7 @@ public class BasicHttpAuthenticationFilter extends HttpAuthenticationFilter {
      * @return the AuthenticationToken used to execute the login attempt
      */
     protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) {
+        //从请求header中获取相应的参数，即 用户名和密码生成的Authorization
         String authorizationHeader = getAuthzHeader(request);
         if (authorizationHeader == null || authorizationHeader.length() == 0) {
             // Create an empty authentication token since there is no
@@ -101,7 +102,7 @@ public class BasicHttpAuthenticationFilter extends HttpAuthenticationFilter {
         }
 
         log.debug("Attempting to execute login with auth header");
-
+        //
         String[] prinCred = getPrincipalsAndCredentials(authorizationHeader, request);
         if (prinCred == null || prinCred.length < 2) {
             // Create an authentication token with an empty password,
@@ -112,11 +113,12 @@ public class BasicHttpAuthenticationFilter extends HttpAuthenticationFilter {
 
         String username = prinCred[0];
         String password = prinCred[1];
-
+        //根据用户名和密码创建相应的AuthenticationToken
         return createToken(username, password, request, response);
     }
 
     /**
+     * 采用basi64进行解密，解密之后返回用户名和密码
      * Returns the username and password pair based on the specified <code>encoded</code> String obtained from
      * the request's authorization header.
      * <p/>

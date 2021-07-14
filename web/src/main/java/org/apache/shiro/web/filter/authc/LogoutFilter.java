@@ -48,6 +48,7 @@ public class LogoutFilter extends AdviceFilter {
     private static final Logger log = LoggerFactory.getLogger(LogoutFilter.class);
 
     /**
+     * 退出后重定向url
      * The default redirect URL to where the user will be redirected after logout.  The value is {@code "/"}, Shiro's
      * representation of the web application's context root.
      */

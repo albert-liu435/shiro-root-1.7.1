@@ -25,6 +25,7 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
 
 /**
+ * 用户过滤器，请求必须为用户
  * Filter that allows access to resources if the accessor is a known user, which is defined as
  * having a known principal.  This means that any user who is authenticated or remembered via a
  * 'remember me' feature will be allowed access from this filter.

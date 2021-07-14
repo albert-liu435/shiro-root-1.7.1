@@ -150,6 +150,7 @@ public abstract class PathMatchingFilter extends AdviceFilter implements PathCon
     }
 
     /**
+     * 如果路径满足匹配规则，则返回ture
      * Returns <code>true</code> if the <code>path</code> matches the specified <code>pattern</code> string,
      * <code>false</code> otherwise.
      * <p/>
@@ -170,6 +171,8 @@ public abstract class PathMatchingFilter extends AdviceFilter implements PathCon
 
     /**
      * 在计算请求之前处理路径匹配行为的实现。
+     * 在preHandle中，当pathsMatch匹配一个路径后，会调用opPreHandler方法并将路径绑定参数配置传给mappedValue；然后可以在这个方法中进行一些验证（如角色授权），如果验证失败可以返回false中断流程；默认返回true；也就是说子类可以只实现onPreHandle即可，
+     * 无须实现preHandle。如果没有path与请求路径匹配，默认是通过的（即preHandle返回true）。
      * Implementation that handles path-matching behavior before a request is evaluated.  If the path matches and
      * the filter
      * {@link #isEnabled(javax.servlet.ServletRequest, javax.servlet.ServletResponse, String, Object) isEnabled} for

@@ -26,6 +26,7 @@ import java.util.regex.Pattern;
 import java.util.Map;
 
 /**
+ * 主机拦截器，根据请求的host进行拦截
  * A Filter that can allow or deny access based on the host that sent the request.
  *
  * <b>WARNING:</b> NOT YET FULLY IMPLEMENTED!!!  Work in progress.

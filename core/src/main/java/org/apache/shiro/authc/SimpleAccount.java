@@ -45,11 +45,13 @@ public class SimpleAccount implements Account, MergableAuthenticationInfo, Salte
     |    I N S T A N C E   V A R I A B L E S    |
     ============================================*/
     /**
+     * 代表用户的主体信息，包括账号和密码
      * The authentication information (principals and credentials) for this account.
      */
     private SimpleAuthenticationInfo authcInfo;
 
     /**
+     * 代表用户的角色与权限信息
      * The authorization information for this account.
      */
     private SimpleAuthorizationInfo authzInfo;

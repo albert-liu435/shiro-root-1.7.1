@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
+ * Port端口过滤器，用于对特定端口的请求进行放行
  * A Filter that requires the request to be on a specific port, and if not, redirects to the same URL on that port.
  * <p/>
  * Example config:

@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * 授权拦截器
  * Superclass for authorization-related filters.  If an request is unauthorized, response handling is delegated to the
  * {@link #onAccessDenied(javax.servlet.ServletRequest, javax.servlet.ServletResponse) onAccessDenied} method, which
  * provides reasonable handling for most applications.
@@ -54,7 +55,7 @@ public abstract class AuthorizationFilter extends AccessControlFilter {
      * if you would like to show the user a 'nice' page in the event of unauthorized access.
      *
      * @return the URL to which users should be redirected if they are denied access to an underlying path or resource,
-     *         or {@code null} if a raw {@link HttpServletResponse#SC_UNAUTHORIZED} response should be issued (401 Unauthorized).
+     * or {@code null} if a raw {@link HttpServletResponse#SC_UNAUTHORIZED} response should be issued (401 Unauthorized).
      */
     public String getUnauthorizedUrl() {
         return unauthorizedUrl;

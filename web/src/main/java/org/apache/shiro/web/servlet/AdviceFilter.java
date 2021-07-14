@@ -28,7 +28,7 @@ import javax.servlet.ServletResponse;
 import java.io.IOException;
 
 /**
- * 一个Servlet过滤器，它通过如下进行
+ * AdviceFilter提供了AOP风格的支持，类似于SpringMVC中的Interceptor：
  * A Servlet Filter that enables AOP-style &quot;around&quot; advice for a ServletRequest via
  * {@link #preHandle(javax.servlet.ServletRequest, javax.servlet.ServletResponse) preHandle},
  * {@link #postHandle(javax.servlet.ServletRequest, javax.servlet.ServletResponse) postHandle},
@@ -45,6 +45,7 @@ public abstract class AdviceFilter extends OncePerRequestFilter {
     private static final Logger log = LoggerFactory.getLogger(AdviceFilter.class);
 
     /**
+     * 类似于AOP中的前置增强；在拦截器链执行之前执行；如果返回true则继续拦截器链；否则中断后续的拦截器链的执行直接返回；进行预处理（如基于表单的身份验证、授权）
      * Returns {@code true} if the filter chain should be allowed to continue, {@code false} otherwise.
      * It is called before the chain is actually consulted/executed.
      * <p/>
@@ -60,6 +61,7 @@ public abstract class AdviceFilter extends OncePerRequestFilter {
     }
 
     /**
+     * 类似于AOP中的后置返回增强；在拦截器链执行完成后执行；进行后处理（如记录执行时间之类的）；
      * Allows 'post' advice logic to be called, but only if no exception occurs during filter chain execution.  That
      * is, if {@link #executeChain executeChain} throws an exception, this method will never be called.  Be aware of
      * this when implementing logic.  Most resource 'cleanup' behavior is often done in the
@@ -78,6 +80,7 @@ public abstract class AdviceFilter extends OncePerRequestFilter {
     }
 
     /**
+     * 类似于AOP中的后置最终增强；即不管有没有异常都会执行；可以进行清理资源（如接触Subject与线程的绑定之类的）；
      * Called in all cases in a {@code finally} block even if {@link #preHandle preHandle} returns
      * {@code false} or if an exception is thrown during filter chain processing.  Can be used for resource
      * cleanup if so desired.

@@ -25,7 +25,7 @@ import javax.servlet.ServletResponse;
 
 /**
  * 匿名过滤器，可以查看DefaultFilter
- * 过滤器，允许访问路径，无需执行任何类型的安全检查。
+ * 过滤器，允许访问路径，无需执行任何类型的安全检查。即对所有的请求进行放行
  * <p>
  * <p>
  * Filter that allows access to a path immeidately without performing security checks of any kind.

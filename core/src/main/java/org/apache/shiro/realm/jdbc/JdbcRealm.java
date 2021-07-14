@@ -226,7 +226,7 @@ public class JdbcRealm extends AuthorizingRealm {
     ============================================*/
 
     /**
-     * 获取用户信息
+     * 获取用户信息进行身份认证
      *
      * @param token the authentication token containing the user's principal and credentials.
      * @return
@@ -354,6 +354,7 @@ public class JdbcRealm extends AuthorizingRealm {
     }
 
     /**
+     * 用于返回角色的名称和对应的权限
      * This implementation of the interface expects the principals collection to return a String username keyed off of
      * this realm's {@link #getName() name}
      *
