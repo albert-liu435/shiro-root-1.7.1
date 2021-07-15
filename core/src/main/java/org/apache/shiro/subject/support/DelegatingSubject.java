@@ -78,6 +78,7 @@ public class DelegatingSubject implements Subject {
 
     //里面封装了用户的身份信息
     protected PrincipalCollection principals;
+    //true表示 身份 验证 通过
     protected boolean authenticated;
     protected String host;
     protected Session session;
